@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MediaSendRecv | WebRTC samples</title>
+  <link rel="stylesheet" href="../_shared/base.css">
+  <script src="../_shared/external.js"></script>
+</head>
+<body>
+  <h1>MediaSendRecv</h1>
+
+  <div>
+    <video id="remoteVideo" autoplay playsinline></video>
+  </div>
+  <select id="media">
+    <option>{ "audio": 0, "video": 1 }</option>
+    <option>{ "audio": 1, "video": 0 }</option>
+    <option>{ "audio": 1, "video": 1 }</option>
+  </select>
+  <button id="connect">connect</button>
+  <button id="mute">mute/unmute</button>
+
+  <hr />
+  <a href="https://github.com/leader22/webrtc-samples/blob/master/docs/media-sendrecv">View source</a>
+  <script type="module" src="./bundle.js"></script>
+</body>
+</html>
