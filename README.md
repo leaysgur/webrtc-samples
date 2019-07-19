@@ -8,7 +8,7 @@ Personal WebRTC samples for cross browser checking.
 - Each `main.js` will be bundled into `bundle.js` by `npm run {dev|build}:docs`.
 - You can use `bundle.js` directly as ESModule entry file.
 
-## external
+## external/
 
 - Original module for signaling
 - And other modules from `npm` to be exported here
