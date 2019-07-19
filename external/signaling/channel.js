@@ -10,6 +10,10 @@ class Channel extends EventEmitter {
     this._name = "";
   }
 
+  get id() {
+    return this._id;
+  }
+
   async join(name) {
     const socket = this._socket;
 
