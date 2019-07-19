@@ -7,7 +7,7 @@ async function createPeer(apiKey) {
     try {
       peer = new Peer({ key: apiKey });
       peer.once("open", () => {
-        peer.removeAllListeners();
+        peer.removeAllListeners("error");
         resolve(peer);
       });
       peer.once("error", err => {
@@ -21,28 +21,16 @@ async function createPeer(apiKey) {
   });
 }
 
-async function createRoom(peer, name) {
-  return new Promise((resolve, reject) => {
-    let room;
-    try {
-      room = peer.joinRoom(name, { mode: "sfu" });
-      room.once("open", () => {
-        room.removeAllListeners();
-        resolve(room);
-      });
-      room.once("error", err => {
-        room.close();
-        reject(err);
-      });
-    } catch (err) {
-      room && room.close();
-      reject(err);
-    }
-  });
-}
+export async function createChannel(apiKey, channelName) {
+  if (!apiKey) {
+    throw new Error("Missing api key!");
+  }
+  if (!channelName) {
+    throw new Error("Missing channel name!");
+  }
 
-export async function createSignalingChannel(apiKey, roomName) {
-  const peer = await createPeer(apiKey);
-  const room = await createRoom(peer, roomName);
-  return new Channel(room);
+  const { id, socket } = await createPeer(apiKey);
+  const channel = new Channel(id, socket);
+  await channel.join(channelName);
+  return channel;
 }

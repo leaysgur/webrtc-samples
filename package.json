@@ -2,16 +2,16 @@
   "name": "webrtc-samples",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack -w",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/leader22/webrtc-samples.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Yuji Sugiura",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/leader22/webrtc-samples/issues"
@@ -19,5 +19,9 @@
   "homepage": "https://github.com/leader22/webrtc-samples#readme",
   "dependencies": {
     "skyway-js": "^2.0.1"
+  },
+  "devDependencies": {
+    "webpack": "^4.36.1",
+    "webpack-cli": "^3.3.6"
   }
 }
