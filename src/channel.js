@@ -13,6 +13,7 @@ class Channel extends EventEmitter {
   async join(name) {
     const socket = this._socket;
 
+    // use "mesh" room to get users
     socket.send("ROOM_JOIN", {
       roomName: name,
       roomType: "mesh"
@@ -43,10 +44,11 @@ class Channel extends EventEmitter {
     });
   }
 
-  leave() {
+  close() {
     const socket = this._socket;
 
     socket.send("ROOM_LEAVE", { roomName: this._name });
+    socket.close();
   }
 
   send(data) {
