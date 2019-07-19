@@ -3,8 +3,6 @@ export const pageId = location.pathname
   .filter(Boolean)
   .pop();
 
-export const query = new URLSearchParams(location.search);
-
 export const signalingKey = localStorage.getItem("SIGNALING_KEY");
 
 export function $(query) {
