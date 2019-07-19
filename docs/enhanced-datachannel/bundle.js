@@ -90,11 +90,11 @@
 /*!********************************!*\
   !*** ./docs/_shared/global.js ***!
   \********************************/
-/*! exports provided: pageId, query, signalingKey, assert, $ */
+/*! exports provided: pageId, query, signalingKey, $ */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"pageId\", function() { return pageId; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"query\", function() { return query; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"signalingKey\", function() { return signalingKey; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"assert\", function() { return assert; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"$\", function() { return $; });\nconst pageId = location.pathname\n  .split(\"/\")\n  .filter(Boolean)\n  .pop();\n\nconst query = new URLSearchParams(location.search);\n\nconst signalingKey = localStorage.getItem(\"SIGNALING_KEY\");\n\nfunction assert(cond, note) {\n  if (cond) {\n    console.log(`🆗: ${note}`);\n  } else {\n    console.error(`🆖: ${note}`);\n\n    if (query.has(\"assert\")) {\n      alert(`🆖: ${note}`);\n    }\n  }\n}\n\nfunction $(query) {\n  const $els = document.querySelectorAll(query);\n  if ($els.length === 0) {\n    throw new Error(`${query} not found!`);\n  }\n  if ($els.length === 1) {\n    return $els[0];\n  }\n  return $els;\n}\n\n\n//# sourceURL=webpack:///./docs/_shared/global.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"pageId\", function() { return pageId; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"query\", function() { return query; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"signalingKey\", function() { return signalingKey; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"$\", function() { return $; });\nconst pageId = location.pathname\n  .split(\"/\")\n  .filter(Boolean)\n  .pop();\n\nconst query = new URLSearchParams(location.search);\n\nconst signalingKey = localStorage.getItem(\"SIGNALING_KEY\");\n\nfunction $(query) {\n  const $els = document.querySelectorAll(query);\n  if ($els.length === 0) {\n    throw new Error(`${query} not found!`);\n  }\n  if ($els.length === 1) {\n    return $els[0];\n  }\n  return $els;\n}\n\n\n//# sourceURL=webpack:///./docs/_shared/global.js?");
 
 /***/ }),
 

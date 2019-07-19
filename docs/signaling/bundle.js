@@ -1,29 +1,19 @@
 const { createChannel } = window.External;
-import { $, pageId, signalingKey, assert } from "../_shared/global.js";
+import { $, pageId, signalingKey } from "../_shared/global.js";
 
 (async () => {
-  assert(typeof signalingKey === "string", "signalingKey exists");
-  assert(typeof pageId === "string", "pageId exists");
-
-  let ch;
-  let timer;
-
   $("#create").onclick = async () => {
-    ch = window.ch = await createChannel(signalingKey, pageId);
-    assert(true, `channel "${pageId}" created`);
+    const ch = (window.ch = await createChannel(signalingKey, pageId));
+    console.warn(`channel "${pageId}" created`);
 
     ch.on("@message", ({ data }) => {
-      if (data === "ping") {
-        ch.send("pong");
-      }
-      if (data === "pong") {
-        assert(true, "recv pong!");
-      }
+      console.warn(`recv ${data}`);
+      if (data === "ping") ch.send("pong");
     });
 
-    timer = setInterval(async () => {
+    const timer = setInterval(async () => {
       const users = await ch.fetchUsers();
-      assert(Array.isArray(users), "fetch userId array");
+      console.warn(users);
 
       const $users = $("#users");
       $users.innerHTML = "";
@@ -36,20 +26,15 @@ import { $, pageId, signalingKey, assert } from "../_shared/global.js";
         }
       }
     }, 2000);
-  };
 
-  $("#ping").onclick = () => {
-    if (!ch) return;
+    $("#ping").onclick = () => {
+      ch.send("ping");
+    };
 
-    ch.send("ping");
-    assert(true, "ping sent!");
-  };
-
-  $("#close").onclick = () => {
-    ch.close();
-    clearInterval(timer);
-    ch = timer = null;
-
-    assert(true, "channel close");
+    $("#close").onclick = () => {
+      ch.close();
+      clearInterval(timer);
+      console.warn("channel closed");
+    };
   };
 })();
