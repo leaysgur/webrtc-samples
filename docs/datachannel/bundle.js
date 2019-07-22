@@ -26,6 +26,8 @@ const { createChannel } = window.External;
 
     pc.oniceconnectionstatechange = () =>
       console.warn("oniceconnectionstatechange", pc.iceConnectionState);
+    pc.onconnectionstatechange = () =>
+      console.warn("onconnectionstatechange", pc.connectionState);
 
     pc.onicecandidate = ev => {
       console.warn("onicecandidate");
@@ -75,6 +77,15 @@ const { createChannel } = window.External;
       };
 
       $("#ping").onclick = () => dc.send("ping");
+    };
+
+    $("#closedc").onclick = () => {
+      console.log("close dc");
+      dc.close();
+    };
+    $("#closepc").onclick = () => {
+      console.log("close pc");
+      pc.close();
     };
   };
 })();

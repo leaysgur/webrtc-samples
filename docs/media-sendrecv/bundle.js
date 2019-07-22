@@ -28,6 +28,8 @@ const { createChannel } = window.External;
 
     pc.oniceconnectionstatechange = () =>
       console.warn("oniceconnectionstatechange", pc.iceConnectionState);
+    pc.onconnectionstatechange = () =>
+      console.warn("onconnectionstatechange", pc.connectionState);
 
     pc.onicecandidate = ev => {
       console.warn("onicecandidate");
@@ -76,6 +78,11 @@ const { createChannel } = window.External;
           track.enabled = !track.enabled;
         });
       };
+    };
+
+    $("#close").onclick = () => {
+      console.log("close");
+      pc.close();
     };
   };
 })();

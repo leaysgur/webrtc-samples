@@ -22,6 +22,8 @@ const { createChannel } = window.External;
 
     pc.oniceconnectionstatechange = () =>
       console.warn("oniceconnectionstatechange", pc.iceConnectionState);
+    pc.onconnectionstatechange = () =>
+      console.warn("onconnectionstatechange", pc.connectionState);
 
     pc.onicecandidate = ev => {
       console.warn("onicecandidate");
@@ -73,5 +75,10 @@ const { createChannel } = window.External;
     }
 
     pc.ontrack = ev => ($("#remoteVideo").srcObject = ev.streams[0]);
+
+    $("#close").onclick = () => {
+      console.log("close");
+      pc.close();
+    };
   };
 })();
