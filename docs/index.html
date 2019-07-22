@@ -24,11 +24,19 @@
     <span>SIGNALING_KEY</span>
     <input type="text" id="js-signaling-key" />
   </label>
+  <label>
+    <span>SIGNALING_SUFFIX</span>
+    <input type="text" id="js-signaling-sfx" />
+  </label>
   <script>
   (() => {
-    const $input = document.querySelector("#js-signaling-key");
-    $input.value = localStorage.getItem("SIGNALING_KEY") || "";
-    $input.onchange = () => localStorage.setItem("SIGNALING_KEY", $input.value);
+    const $key = document.querySelector("#js-signaling-key");
+    $key.value = localStorage.getItem("SIGNALING_KEY") || "";
+    $key.onchange = () => localStorage.setItem("SIGNALING_KEY", $key.value);
+
+    const $sfx = document.querySelector("#js-signaling-sfx");
+    $sfx.value = localStorage.getItem("SIGNALING_SFX") || "";
+    $sfx.onchange = () => localStorage.setItem("SIGNALING_SFX", $sfx.value);
   })();
   </script>
 </body>

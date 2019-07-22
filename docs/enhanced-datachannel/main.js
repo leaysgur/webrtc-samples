@@ -1,10 +1,10 @@
 import { promised } from "enhanced-datachannel";
-import { $, pageId, signalingKey } from "../_shared/global";
+import { $, signalingId, signalingKey } from "../_shared/global";
 const { createChannel } = window.External;
 
 (async () => {
   $("#connect").onclick = async () => {
-    const ch = await createChannel(signalingKey, pageId);
+    const ch = await createChannel(signalingKey, signalingId);
 
     const users = await ch.fetchUsers();
     console.log(users);
@@ -21,7 +21,7 @@ const { createChannel } = window.External;
     console.log("pc created w/", pcConf);
 
     const dcInit = { negotiated: true, id: 1 };
-    const dc = (window.dc = pc.createDataChannel(pageId, dcInit));
+    const dc = (window.dc = pc.createDataChannel("", dcInit));
     console.log("dc created w/", dcInit);
 
     pc.onicecandidate = ev => {

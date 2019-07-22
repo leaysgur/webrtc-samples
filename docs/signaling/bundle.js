@@ -1,10 +1,10 @@
 const { createChannel } = window.External;
-import { $, pageId, signalingKey } from "../_shared/global.js";
+import { $, signalingId, signalingKey } from "../_shared/global.js";
 
 (async () => {
   $("#create").onclick = async () => {
-    const ch = (window.ch = await createChannel(signalingKey, pageId));
-    console.warn(`channel "${pageId}" created`);
+    const ch = (window.ch = await createChannel(signalingKey, signalingId));
+    console.warn(`channel "${signalingId}" created`);
 
     ch.on("@message", ({ data }) => {
       console.warn(`recv ${data}`);

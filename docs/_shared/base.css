@@ -3,6 +3,10 @@
   font-size: 14px;
 }
 
+label {
+  display: block;
+}
+
 video {
   width: 50%;
   background-color: #111;

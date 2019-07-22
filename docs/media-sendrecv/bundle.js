@@ -1,9 +1,9 @@
-import { $, pageId, signalingKey } from "../_shared/global.js";
+import { $, signalingId, signalingKey } from "../_shared/global.js";
 const { createChannel } = window.External;
 
 (async () => {
   $("#connect").onclick = async () => {
-    const ch = await createChannel(signalingKey, pageId);
+    const ch = await createChannel(signalingKey, signalingId);
 
     const users = await ch.fetchUsers();
     console.log(users);

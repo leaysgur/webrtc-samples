@@ -1,8 +1,9 @@
-export const pageId = location.pathname
+const pageId = location.pathname
   .split("/")
   .filter(Boolean)
   .pop();
 
+export const signalingId = localStorage.getItem("SIGNALING_SFX") + "+" + pageId;
 export const signalingKey = localStorage.getItem("SIGNALING_KEY");
 
 export function $(query) {
