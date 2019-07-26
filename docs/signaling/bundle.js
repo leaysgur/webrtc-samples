@@ -1,7 +1,14 @@
+import {
+  $,
+  signalingId,
+  signalingKey,
+  appendFooter
+} from "../_shared/global.js";
 const { createChannel } = window.External;
-import { $, signalingId, signalingKey } from "../_shared/global.js";
 
 (async () => {
+  appendFooter(navigator.userAgent);
+
   $("#create").onclick = async () => {
     const ch = (window.ch = await createChannel(signalingKey, signalingId));
     console.warn(`channel "${signalingId}" created`);

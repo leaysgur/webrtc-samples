@@ -16,3 +16,19 @@ export function $(query) {
   }
   return $els;
 }
+
+export function appendFooter(ua) {
+  const $a = document.createElement("a");
+  $a.href = `https://github.com/leader22/webrtc-samples/blob/master/docs/${pageId}`;
+  $a.textContent = "View source";
+
+  const $text = document.createTextNode(" | UA: ");
+
+  const $span = document.createElement("span");
+  $span.textContent = ua;
+
+  document.body.append(document.createElement("hr"));
+  document.body.append($a);
+  document.body.append($text);
+  document.body.append($span);
+}

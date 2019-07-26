@@ -1,8 +1,10 @@
 import { promised } from "enhanced-datachannel";
-import { $, signalingId, signalingKey } from "../_shared/global";
+import { $, signalingId, signalingKey, appendFooter } from "../_shared/global";
 const { createChannel } = window.External;
 
 (async () => {
+  appendFooter(navigator.userAgent);
+
   $("#connect").onclick = async () => {
     const ch = await createChannel(signalingKey, signalingId);
 
