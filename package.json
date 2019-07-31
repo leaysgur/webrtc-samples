@@ -21,6 +21,7 @@
   "homepage": "https://github.com/leader22/webrtc-samples#readme",
   "dependencies": {
     "enhanced-datachannel": "^1.1.1",
+    "simple-p2p": "0.0.2",
     "skyway-js": "^2.0.1"
   },
   "devDependencies": {
