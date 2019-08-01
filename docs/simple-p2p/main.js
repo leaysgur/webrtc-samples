@@ -32,10 +32,15 @@ const { createChannel } = window.External;
       dc.onmessage = ev => ($("#message").textContent = ev.data);
     });
     tr.mediaHandler.on("receiver", r => {
-      const $video = document.createElement("video");
-      $video.srcObject = new MediaStream([r.track]);
-      $video.play().catch(console.error);
-      $("#media").appendChild($video);
+      const { track, kind } = r;
+      const $media = document.createElement(kind);
+      $media.playsInline = true;
+      $media.srcObject = new MediaStream([track]);
+      $media.play().catch(console.error);
+      $("#media").appendChild($media);
+
+      r.on("replace", () => console.log("replaced!"));
+      r.on("ended", () => $media.remove());
     });
 
     if (role === "offer") {
@@ -45,12 +50,21 @@ const { createChannel } = window.External;
     tr.once("open", async () => {
       console.log("transport open!", tr);
 
+      // dataHandler
       $("#createdata").onclick = async () => {
         dc = await tr.dataHandler.createChannel();
         console.log("create DataChannel", dc);
         dc.onmessage = ev => ($("#message").textContent = ev.data);
       };
       $("#senddata").onclick = () => dc.send(`Hello at ${Date.now()}`);
+
+      // mediaHandler
+      $("#sendaudio").onclick = async () => {
+        const at = await navigator.mediaDevices
+          .getUserMedia({ audio: true })
+          .then(s => s.getAudioTracks()[0]);
+        await tr.mediaHandler.sendTrack(at);
+      };
 
       $("#sendvideo").onclick = async () => {
         const vt = await navigator.mediaDevices
@@ -65,17 +79,16 @@ const { createChannel } = window.External;
           await sender.replace(vt);
         };
       };
-      $("#sendaudio").onclick = async () => {
-        const at = await navigator.mediaDevices
-          .getUserMedia({ audio: true })
-          .then(s => s.getAudioTracks()[0]);
-        await tr.mediaHandler.sendTrack(at);
-      };
+
+      let dispSender;
       $("#senddisp").onclick = async () => {
         const vt = await navigator.mediaDevices
           .getDisplayMedia({ video: true })
           .then(s => s.getVideoTracks()[0]);
-        await tr.mediaHandler.sendTrack(vt);
+        dispSender = await tr.mediaHandler.sendTrack(vt);
+      };
+      $("#enddisp").onclick = async () => {
+        await dispSender.end().catch(console.error);
       };
     });
   };
