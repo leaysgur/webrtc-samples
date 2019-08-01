@@ -15,7 +15,7 @@ async function createPeer(apiKey) {
         reject(err);
       });
     } catch (err) {
-      peer && peer.close();
+      peer && peer.destroy();
       reject(err);
     }
   });
