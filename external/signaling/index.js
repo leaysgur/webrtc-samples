@@ -11,7 +11,7 @@ async function createPeer(apiKey) {
         resolve(peer);
       });
       peer.once("error", err => {
-        peer.close();
+        peer.destroy();
         reject(err);
       });
     } catch (err) {
